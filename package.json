@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "author": "Gelato Labs",
   "license": "ISC",
+  "type": "module",
   "dependencies": {
+    "@vercel/kv": "^0.2.3",
     "node-fetch": "^3.3.2"
   }
 }

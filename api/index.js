@@ -1,7 +1,28 @@
+import fetch from 'node-fetch';
+import { kv } from '@vercel/kv/dist/index.cjs';
+
 export default async (req, res) => {
   try {
-    const fetchModule = await import('node-fetch');
-    const fetch = fetchModule.default;
+    const ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
+    let gpt4Count = await kv.get(`gpt4:${ip}`);
+    let gpt35Count = await kv.get(`gpt35:${ip}`);
+
+    let model = 'gpt-4';
+    if (gpt4Count < process.env.LIMIT_GPT4 || gpt4Count === null) {
+      gpt4Count = await kv.incr(`gpt4:${ip}`);
+      if (gpt4Count === 1) {
+        await kv.expire(`gpt4:${ip}`, 86400);
+      }
+    } else if (gpt35Count < process.env.LIMIT_GPT35) {
+      model = 'gpt-3.5-turbo';
+      gpt35Count = await kv.incr(`gpt35:${ip}`);
+      if (gpt35Count === 1) {
+        await kv.expire(`gpt35:${ip}`, 86400);
+      }
+    } else {
+      res.status(429).send('Sorry, you\'re playing too much. This AI stuff costs us money, you know? Come back tomorrow!');
+      return;
+    }
 
     const prompt = req.body.prompt;
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
