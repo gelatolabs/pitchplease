@@ -1,12 +1,93 @@
-const startBtn = document.getElementById('startBtn');
 const transcriptText = document.getElementById('transcript');
 const elevator = document.getElementById('elevator');
+const speechBubbleContainer = document.getElementById('speechBubbleContainer');
 const speechBubble = document.getElementById('speechBubble');
+const playerSprite = document.getElementById('player');
+const investorSprite = document.getElementById('investor');
 const scoreText = document.getElementById('score');
 
+const dialogues = [
+  [
+    "An investor steps into the elevator.",
+    "SHOW_INVESTOR",
+    "Investor: Good morning.",
+    "You: Hi! You look like an investor. Can I pitch you my startup?",
+    "Investor: Do I have a choice?",
+    "You: Nope, you're stuck in here with me! I'm building {IDEA}."
+  ],
+  [
+    "HIDE_INVESTOR",
+    "Player: Let's pivot.",
+    "SHOW_INVESTOR",
+    "Player: Let me tell you about {IDEA}.",
+    "Investor: I'm listening."
+  ],
+  [
+    "HIDE_INVESTOR",
+    "Player: Let's try something else.",
+    "SHOW_INVESTOR",
+    "Player: Spare some change? I'm working on {IDEA}.",
+    "Investor: Tell me more."
+  ],
+]
+
+const ideas = [
+  "the first VR dating app",
+  "the next big B2B SaaS product",
+  "a metaverse on the blockchain",
+  "Twitter for dogs. I mean, X for dogs."
+]
+
 let score = 0;
+let dialogueIndex = 0;
+let lineIndex = 0;
+let recognizing = false;
+let responding = false;
+let finalTranscript = '';
+let recognition;
+
+function nextDialogue() {
+  const lines = dialogues[dialogueIndex];
+  if (lineIndex < lines.length) {
+    let line = lines[lineIndex];
+    line = line.replace('{IDEA}', ideas[Math.floor(Math.random() * ideas.length)]);
+    if (line === 'SHOW_INVESTOR') {
+      investorSprite.style.display = 'block';
+      elevator.className = 'open';
+      speechBubbleContainer.style.display = 'none';
+    } else if (line === 'HIDE_INVESTOR') {
+      investorSprite.style.display = 'none';
+      elevator.className = 'open';
+      speechBubbleContainer.style.display = 'none';
+    } else {
+      elevator.className = '';
+      speechBubbleContainer.style.display = 'block';
+      transcriptText.textContent = line;
+      speechBubbleContainer.className = line.startsWith('You:') ? 'player' : line.startsWith('Investor:') ? 'investor' : 'narrator';
+    }
+    lineIndex++;
+  } else {
+    dialogueIndex++;
+    lineIndex = 0;
+    finalTranscript = '';
+    transcriptText.innerHTML = '<i>Pitch aloud...</i>';
+    speechBubbleContainer.className = 'player pitch';
+    recognition.start();
+  }
+}
+
+async function endPitch() {
+  recognition.stop();
+  recognizing = false;
+  speechBubbleContainer.className = 'investor';
+  transcriptText.textContent = '🤔';
+  console.log(finalTranscript);
+  await sendToGPT(finalTranscript);
+}
 
 async function sendToGPT(transcript) {
+  responding = true;
+
   const response = await fetch('/api', {
     method: 'POST',
     headers: {
@@ -21,8 +102,9 @@ async function sendToGPT(transcript) {
   }
 
   const data = await response.json();
-  const message = data.choices[0].message.content.trim();
+  const message = "Investor: " + data.choices[0].message.content.trim().replace(/^[a-zA-Z]*: /, '');
   console.log(message);
+  speechBubbleContainer.className = 'investor';
   transcriptText.textContent = message;
 
   const investmentMatch = message.match(/\$\s?[\d,]+(\.\d+)?/);
@@ -30,18 +112,17 @@ async function sendToGPT(transcript) {
   score += investmentAmount;
   scoreText.textContent = `Score: $${score}`;
 
-  let fontSize = 32;
+  let fontSize = 38;
   while (speechBubble.scrollHeight > elevator.clientHeight || speechBubble.scrollWidth > elevator.clientWidth) {
     fontSize--;
     transcriptText.style.fontSize = `${fontSize}px`;
   }
+
+  responding = false;
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  let recognizing = false;
-  let finalTranscript = '';
-
-  const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
+  recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
   recognition.continuous = true;
   recognition.interimResults = true;
   recognition.lang = 'en-US';
@@ -62,13 +143,8 @@ document.addEventListener('DOMContentLoaded', function () {
     transcriptText.textContent = finalTranscript + interimTranscript;
 
     if (speechBubble.scrollHeight > elevator.clientHeight || speechBubble.scrollWidth > elevator.clientWidth) {
-      transcriptText.textContent = finalTranscript.trim();
-      recognition.stop();
-      startBtn.style.display = 'block';
-      recognizing = false;
-      console.log(finalTranscript.trim());
-      sendToGPT(finalTranscript.trim());
-      return;
+      finalTranscript += interimTranscript;
+      endPitch();
     }
   }
 
@@ -76,10 +152,13 @@ document.addEventListener('DOMContentLoaded', function () {
     console.error(event.error);
   };
 
-  startBtn.addEventListener('click', function () {
-    recognition.start();
-    startBtn.style.display = 'none';
-    finalTranscript = '';
-    transcriptText.textContent = '';
+  elevator.addEventListener('click', function () {
+    if (recognizing) {
+      endPitch();
+    } else if (!responding) {
+      nextDialogue();
+    }
   });
+
+  nextDialogue();
 });

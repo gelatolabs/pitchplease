@@ -14,7 +14,7 @@ body {
 
 p,
 a {
-  font-size: 32px;
+  font-size: 38px;
   color: #fff;
 }
 
@@ -24,55 +24,88 @@ a {
   top: 50%;
   width: 500px;
   height: 500px;
-  background-color: #fff;
+  background-image: url('img/elevator.png');
   overflow: hidden;
   transform: translate(-50%, -50%);
+}
+
+#elevator.open {
+  background-image: url('img/elevator-open.png');
 }
 
 #speechBubbleContainer {
   position: absolute;
   top: 0;
   left: 0;
-  max-width: 100%;
-  max-height: 100%;
+  max-width: calc(100% - 16px);
+  max-height: calc(100% - 16px);
   margin: 8px;
+  z-index: 1;
 }
 
 #speechBubble {
   position: relative;
   overflow: hidden;
+  background-color: #fff;
   border: 4px solid #000;
   border-radius: 10px;
 }
 
-#speechBubbleContainer:after {
+#speechBubbleContainer:not(.pitch),
+#speechBubbleContainer:not(.pitch) {
+  width: calc(100% - 16px);
+}
+
+#speechBubbleContainer.pitch {
+  min-width: 110px;
+}
+
+#speechBubbleContainer.player:after,
+#speechBubbleContainer.investor:after {
   content: "";
   position: absolute;
   bottom: 0;
-  right: 6px;
   width: 0;
   height: 0;
   border: 26px solid transparent;
   border-top-color: #000;
   border-bottom: 0;
-  border-right: 0;
   margin-bottom: -24px;
   z-index: 1;
 }
 
-#speechBubbleContainer:before {
+#speechBubbleContainer.player:before,
+#speechBubbleContainer.investor:before {
   content: "";
   position: absolute;
   bottom: 0;
-  right: 10px;
   width: 0;
   height: 0;
   border: 18px solid transparent;
   border-top-color: #fff;
   border-bottom: 0;
-  border-right: 0;
   margin-bottom: -14px;
   z-index: 2;
+}
+
+#speechBubbleContainer.player:after {
+  left: 76px;
+  border-right: 0;
+}
+
+#speechBubbleContainer.player:before {
+  left: 80px;
+  border-right: 0;
+}
+
+#speechBubbleContainer.investor:after {
+  right: 76px;
+  border-left: 0;
+}
+
+#speechBubbleContainer.investor:before {
+  right: 80px;
+  border-left: 0;
 }
 
 #transcript {
@@ -81,7 +114,17 @@ a {
   font-size: 32px;
   color: #000;
   white-space: pre-wrap;
-  text-transform: uppercase;
+}
+
+#player,
+#investor {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#investor {
+  display: none;
 }
 
 #info {
