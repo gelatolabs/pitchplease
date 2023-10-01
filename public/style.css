@@ -13,15 +13,28 @@ body {
 }
 
 p,
-a {
-  font-size: 38px;
+a,
+h1,
+h2 {
   color: #fff;
 }
 
-h1 {
+p,
+a {
+  font-size: 38px;
+}
+
+h1,
+h2 {
   margin-bottom: 0;
+}
+
+h1 {
   font-size: 80px;
-  color: #fff;
+}
+
+h2 {
+  font-size: 48px;
 }
 
 #logo {

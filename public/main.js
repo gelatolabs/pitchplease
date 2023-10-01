@@ -71,11 +71,13 @@ function nextDialogue() {
   if (lineIndex < lines.length) {
     const line = lines[lineIndex].replace('{IDEA}', ideas[difficulty][Math.floor(Math.random() * ideas[difficulty].length)]);
     if (line === 'SHOW_INVESTOR') {
+      new Audio('audio/open.mp3').play();
       investorSprite.src = `img/investor${difficulty}.png`;
       investorSprite.style.display = 'block';
       elevator.className = 'open';
       speechBubbleContainer.style.display = 'none';
     } else if (line === 'HIDE_INVESTOR') {
+      new Audio('audio/close.mp3').play();
       investorSprite.style.display = 'none';
       elevator.className = 'open';
       speechBubbleContainer.style.display = 'none';
@@ -100,9 +102,10 @@ function nextDialogue() {
 }
 
 async function endPitch() {
+  new Audio('audio/ding.mp3').play();
   recognition.stop();
   speechBubbleContainer.className = 'investor';
-  transcriptText.textContent = '🤔';
+  transcriptText.textContent = 'Investor: That\'s my stop. Hmm...';
   console.log(finalTranscript);
   await sendToGPT(finalTranscript);
 }
