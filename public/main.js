@@ -38,13 +38,20 @@ const dialogues = [
 ]
 
 const ideas = [
-  "the first VR dating app",
-  "the next big B2B SaaS product",
-  "a metaverse on the blockchain",
-  "Twitter for dogs. I mean, X for dogs."
+  [
+    "the first VR dating app"
+  ],
+  [
+    "the next big B2B SaaS product",
+    "a metaverse on the blockchain",
+  ],
+  [
+    "Twitter for dogs. I mean, X for dogs."
+  ]
 ]
 
 let score = 0;
+let difficulty = 0;
 let dialogueIndex = 0;
 let lineIndex = 0;
 let state = 'normal';
@@ -53,10 +60,18 @@ let recognition;
 
 function nextDialogue() {
   const lines = dialogues[dialogueIndex];
+
+  if (dialogueIndex <= 0) {
+    difficulty = 0;
+  } else if (dialogueIndex <= 1) {
+    difficulty = 1;
+  } else {
+    difficulty = 2;
+  }
   if (lineIndex < lines.length) {
-    let line = lines[lineIndex];
-    line = line.replace('{IDEA}', ideas[Math.floor(Math.random() * ideas.length)]);
+    const line = lines[lineIndex].replace('{IDEA}', ideas[difficulty][Math.floor(Math.random() * ideas[difficulty].length)]);
     if (line === 'SHOW_INVESTOR') {
+      investorSprite.src = `img/investor${difficulty}.png`;
       investorSprite.style.display = 'block';
       elevator.className = 'open';
       speechBubbleContainer.style.display = 'none';
@@ -100,7 +115,7 @@ async function sendToGPT(transcript) {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ prompt: transcript })
+    body: JSON.stringify({ prompt: transcript, budget: difficulty * 100000 })
   });
 
   if (!response.ok) {
@@ -194,7 +209,7 @@ document.addEventListener('DOMContentLoaded', function () {
     } else if (state === 'recognizing') {
       endPitch();
     } else if (state === 'gameover') {
-      window.location.reload();
+      window.location.href = '/';
     } else {
       nextDialogue();
     }
