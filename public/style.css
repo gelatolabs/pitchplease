@@ -127,18 +127,30 @@ a {
   display: none;
 }
 
+#leaderboard {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  z-index: 1;
+}
+
+#leaderboard>p {
+  margin: 0;
+}
+
 #info {
   position: absolute;
-  display: flex;
-  gap: 1em;
   top: 1em;
   left: 50%;
   transform: translateX(-50%);
 }
 
-#startBtn {
-  height: 2em;
-  align-self: center;
+#warning {
+  margin: 0;
+  color: #f00;
+  font-size: 24px;
 }
 
 #score {

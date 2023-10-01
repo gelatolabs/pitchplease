@@ -5,6 +5,7 @@ const speechBubble = document.getElementById('speechBubble');
 const playerSprite = document.getElementById('player');
 const investorSprite = document.getElementById('investor');
 const scoreText = document.getElementById('score');
+const leaderboard = document.getElementById('leaderboard');
 
 const dialogues = [
   [
@@ -29,6 +30,11 @@ const dialogues = [
     "Player: Spare some change? I'm working on {IDEA}.",
     "Investor: Tell me more."
   ],
+  [
+    "HIDE_INVESTOR",
+    "Player: OK, time to retire.",
+    "THE END"
+  ]
 ]
 
 const ideas = [
@@ -41,8 +47,7 @@ const ideas = [
 let score = 0;
 let dialogueIndex = 0;
 let lineIndex = 0;
-let recognizing = false;
-let responding = false;
+let state = 'normal';
 let finalTranscript = '';
 let recognition;
 
@@ -66,19 +71,20 @@ function nextDialogue() {
       speechBubbleContainer.className = line.startsWith('You:') ? 'player' : line.startsWith('Investor:') ? 'investor' : 'narrator';
     }
     lineIndex++;
-  } else {
+  } else if (dialogueIndex < dialogues.length - 1) {
     dialogueIndex++;
     lineIndex = 0;
     finalTranscript = '';
     transcriptText.innerHTML = '<i>Pitch aloud...</i>';
     speechBubbleContainer.className = 'player pitch';
     recognition.start();
+  } else {
+    endGame();
   }
 }
 
 async function endPitch() {
   recognition.stop();
-  recognizing = false;
   speechBubbleContainer.className = 'investor';
   transcriptText.textContent = '🤔';
   console.log(finalTranscript);
@@ -86,9 +92,9 @@ async function endPitch() {
 }
 
 async function sendToGPT(transcript) {
-  responding = true;
+  state = 'responding';
 
-  const response = await fetch('/api', {
+  const response = await fetch('/api/gpt', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -118,7 +124,27 @@ async function sendToGPT(transcript) {
     transcriptText.style.fontSize = `${fontSize}px`;
   }
 
-  responding = false;
+  state = 'normal';
+}
+
+async function endGame() {
+  state = 'gameover';
+
+  const name = prompt('Thanks for playing! Enter your name to upload your score to the leaderboard:');
+  if (name === null || name === '') return;
+
+  const response = await fetch('/api/scores', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ score, name })
+  });
+
+  const data = await response.json();
+
+  leaderboard.innerHTML = '<p>Leaderboard</p>' + data.scores.map(score => `<p>${score.name}: $${score.score}</p>`).join('');
+  leaderboard.style.display = 'block';
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -128,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function () {
   recognition.lang = 'en-US';
 
   recognition.onstart = function () {
-    recognizing = true;
+    state = 'recognizing';
   };
 
   recognition.onresult = function (event) {
@@ -153,9 +179,11 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
   elevator.addEventListener('click', function () {
-    if (recognizing) {
+    if (state === 'recognizing') {
       endPitch();
-    } else if (!responding) {
+    } else if (state === 'gameover') {
+      window.location.reload();
+    } else if (state !== 'responding') {
       nextDialogue();
     }
   });
