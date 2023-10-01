@@ -88,6 +88,22 @@ a {
   z-index: 2;
 }
 
+#speechBubbleContainer.waiting #speechBubble {
+  background-color: #f0e68c;
+}
+
+#speechBubbleContainer.waiting:before {
+  border-top-color: #f0e68c;
+}
+
+#speechBubbleContainer.listening #speechBubble {
+  background-color: #d0f0d0;
+}
+
+#speechBubbleContainer.listening:before {
+  border-top-color: #d0f0d0;
+}
+
 #speechBubbleContainer.player:after {
   left: 76px;
   border-right: 0;

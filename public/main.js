@@ -72,11 +72,12 @@ function nextDialogue() {
     }
     lineIndex++;
   } else if (dialogueIndex < dialogues.length - 1) {
+    state = 'waiting';
     dialogueIndex++;
     lineIndex = 0;
     finalTranscript = '';
-    transcriptText.innerHTML = '<i>Pitch aloud...</i>';
-    speechBubbleContainer.className = 'player pitch';
+    transcriptText.innerHTML = '<i>Please wait...</i>';
+    speechBubbleContainer.className = 'player pitch waiting';
     recognition.start();
   } else {
     endGame();
@@ -92,7 +93,7 @@ async function endPitch() {
 }
 
 async function sendToGPT(transcript) {
-  state = 'responding';
+  state = 'waiting';
 
   const response = await fetch('/api/gpt', {
     method: 'POST',
@@ -154,7 +155,11 @@ document.addEventListener('DOMContentLoaded', function () {
   recognition.lang = 'en-US';
 
   recognition.onstart = function () {
-    state = 'recognizing';
+    setTimeout(() => {
+      state = 'recognizing';
+      speechBubbleContainer.className = 'player pitch listening';
+      transcriptText.innerHTML = '<i>Pitch aloud...</i>';
+    }, 2000);
   };
 
   recognition.onresult = function (event) {
@@ -174,16 +179,23 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+  recognition.onend = function () {
+    if (state === 'recognizing')
+      endPitch();
+  };
+
   recognition.onerror = function (event) {
     console.error(event.error);
   };
 
   elevator.addEventListener('click', function () {
-    if (state === 'recognizing') {
+    if (state === 'waiting') {
+      return;
+    } else if (state === 'recognizing') {
       endPitch();
     } else if (state === 'gameover') {
       window.location.reload();
-    } else if (state !== 'responding') {
+    } else {
       nextDialogue();
     }
   });
