@@ -147,7 +147,8 @@ a {
   transform: translateX(-50%);
 }
 
-#warning {
+#warning,
+#warning a {
   margin: 0;
   color: #f00;
   font-size: 24px;
