@@ -160,11 +160,21 @@ a {
   font-size: 32px;
 }
 
-#credits {
+#footer {
+  display: flex;
+  gap: 1em;
   position: absolute;
   bottom: 1em;
   left: 50%;
   color: #fff;
   font-size: 32px;
   transform: translateX(-50%);
+}
+
+#gelato {
+  color: #0f0;
+}
+
+#gelato>img {
+  height: 1em;
 }
