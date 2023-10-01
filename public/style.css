@@ -18,6 +18,16 @@ a {
   color: #fff;
 }
 
+h1 {
+  margin-bottom: 0;
+  font-size: 80px;
+  color: #fff;
+}
+
+#logo {
+  height: 2.5em;
+}
+
 #elevator {
   position: absolute;
   left: 50%;

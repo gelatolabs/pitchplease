@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Pitch, Please!</title>
+</head>
+
+<body>
+  <div id="info">
+    <p id="warning">If voice recognition doesn't work, use Chrome or Safari<a
+        href="https://caniuse.com/speech-recognition" target="_blank" rel="noopener noreferrer">*</a>. Sorry!<br />
+      Your voice may be processed by a cloud service depending on your browser/OS. A text transcript will be sent to
+      OpenAI<a href="https://openai.com/enterprise-privacy#:~:text=API%20Platform%20FAQ,-What%20is%20the"
+        target="_blank" rel="noopener noreferrer">*</a>.</p>
+    <p id="score">Score: $0</p>
+  </div>
+  <div id="elevator">
+    <div id="speechBubbleContainer">
+      <div id="speechBubble">
+        <p id="transcript"></p>
+      </div>
+    </div>
+    <img id="player" src="img/player.png" />
+    <img id="investor" src="img/investor.png" />
+    <div id="leaderboard"></div>
+  </div>
+  <div id="footer">
+    <a id="gelato" href="https://gelatolabs.xyz" onclick="new Audio('audio/meow.mp3').play()" target="_blank"
+      rel="noopener noreferrer">
+      <img src="img/gelato.png" alt="Gelato Labs" />
+    </a>
+    <a id="credits" href="credits.html" target="_blank">Credits</a>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+
+</html>
