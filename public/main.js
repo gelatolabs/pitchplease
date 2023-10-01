@@ -167,7 +167,12 @@ async function endGame() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
+  try {
+    recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
+  } catch (error) {
+    alert('Your browser does not support speech recognition. Please use Chrome/Safari or check your permissions. Sorry!');
+    return;
+  }
   recognition.continuous = true;
   recognition.interimResults = true;
   recognition.lang = 'en-US';
