@@ -1,13 +1,20 @@
 @font-face {
-  font-family: 'GrapeSoda';
-  src: url('grapesoda.ttf') format('truetype');
+  font-family: 'RS';
+  src: url('font/rs.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'DigitalDisco';
+  src: url('font/digitaldisco.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 body {
   background-color: #000;
-  font-family: "GrapeSoda", monospace;
+  font-family: "RS", monospace;
   margin: 0;
   text-align: center;
 }
@@ -26,6 +33,8 @@ a {
 
 h1,
 h2 {
+  font-family: 'DigitalDisco', monospace;
+  font-weight: normal;
   margin-bottom: 0;
 }
 
@@ -69,7 +78,7 @@ h2 {
 #speechBubble {
   position: relative;
   overflow: hidden;
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.8);
   border: 4px solid #000;
   border-radius: 10px;
 }
@@ -105,7 +114,7 @@ h2 {
   width: 0;
   height: 0;
   border: 18px solid transparent;
-  border-top-color: #fff;
+  border-top-color: rgba(255, 255, 255, 0.87);
   border-bottom: 0;
   margin-bottom: -14px;
   z-index: 2;
@@ -150,7 +159,7 @@ h2 {
 #transcript {
   margin: 0;
   padding: 0.5em;
-  font-size: 32px;
+  font-size: 44px;
   color: #000;
   white-space: pre-wrap;
 }
@@ -183,6 +192,7 @@ h2 {
   position: absolute;
   top: 1em;
   left: 50%;
+  width: 100%;
   transform: translateX(-50%);
 }
 
@@ -216,4 +226,61 @@ h2 {
 
 #gelato>img {
   height: 1em;
+}
+
+#ideaSpinnerContainer {
+  display: none;
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  height: 57px;
+  width: 100%;
+  max-width: calc(100% - 16px);
+  border: 4px solid black;
+  border-radius: 10px;
+  overflow: hidden;
+  transform: translateX(-50%);
+  background-color: #fff;
+}
+
+#ideaSpinner {
+  height: 100%;
+  text-align: center;
+  font-size: 19px;
+}
+
+#ideaSpinner span {
+  display: block;
+}
+
+#ideaSpinner span:nth-child(even) {
+  background-color: #ff0;
+}
+
+@keyframes spin {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-1500%);
+  }
+}
+
+.fadeToBlack {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  z-index: 1;
+  animation: fadeToBlack 4s ease-in-out;
+  opacity: 0;
+}
+
+@keyframes fadeToBlack {
+  50% {
+    opacity: 1;
+  }
 }
