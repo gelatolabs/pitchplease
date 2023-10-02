@@ -17,9 +17,11 @@ export default async (req, res) => {
       scores = [];
     }
 
-    scores.push({ name, score });
-    scores.sort((a, b) => b.score - a.score);
-    await kv.set('scores', JSON.stringify(scores));
+    if (name !== '') {
+      scores.push({ name, score });
+      scores.sort((a, b) => b.score - a.score);
+      await kv.set('scores', JSON.stringify(scores));
+    }
     res.json({ scores });
   } catch (error) {
     console.error(error);

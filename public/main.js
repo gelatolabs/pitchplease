@@ -472,7 +472,7 @@ async function endGame() {
 
   const data = await response.json();
 
-  leaderboard.innerHTML = '<p>Leaderboard</p>' + data.scores.map(score => `<p>${score.name}: $${score.score}</p>`).join('');
+  leaderboard.innerHTML = '<p>High Scores</p>' + data.scores.map(score => `<p>${score.name}: $${score.score}</p>`).join('');
   leaderboard.style.display = 'block';
 }
 

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Pitch, Please! - Credits</title>
+    <link rel="icon" href="favicon.ico" type="image/vnd.microsoft.icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <a href="/" onclick="window.close()">Back</a>
+    <h1>High Scores</h1>
+    <div id="scores"></div>
+
+    <script>
+        async function getScores() {
+            const response = await fetch('/api/scores', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ score: 0, name: '' })
+            });
+
+            const data = await response.json();
+
+            const leaderboard = document.getElementById('scores');
+            leaderboard.innerHTML = data.scores.map(score => `${score.name}: $${score.score}`).join('<br>');
+        }
+        getScores();
+    </script>
+</body>
+
+</html>
