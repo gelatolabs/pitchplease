@@ -10,21 +10,6 @@
 </head>
 
 <body>
-  <div id="info">
-    <p id="warning">If voice recognition doesn't work, use Chrome/Safari<a href="https://caniuse.com/speech-recognition"
-        target="_blank" rel="noopener noreferrer">*</a> or check your permissions. Sorry!<br />
-      Your voice may be processed by a cloud service depending on your browser/OS. A text transcript will be sent to
-      OpenAI<a href="https://openai.com/enterprise-privacy#:~:text=API%20Platform%20FAQ,-What%20is%20the"
-        target="_blank" rel="noopener noreferrer">*</a>.</p><br />
-    <p id="score">Score: $0</p>
-  </div>
-  <div id="footer">
-    <a id="gelato" href="https://gelatolabs.xyz" onclick="new Audio('audio/meow.mp3').play()" target="_blank"
-      rel="noopener noreferrer">
-      <img src="img/gelato.png" alt="Gelato Labs" />
-    </a>
-    <a id="credits" href="credits.html" target="_blank">Credits</a>
-  </div>
   <div id="elevator">
     <div id="speechBubbleContainer">
       <div id="speechBubble">
@@ -36,6 +21,24 @@
     <div id="leaderboard"></div>
     <div id="ideaSpinnerContainer">
       <div id="ideaSpinner"></div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p id="score">Score: $0</p>
+    <p id="warning">If voice recognition doesn't work, use Chrome/Safari<a href="https://caniuse.com/speech-recognition"
+        target="_blank" rel="noopener noreferrer">*</a> or check your permissions. Sorry!<br />
+      Your voice may be processed by a cloud service depending on your browser/OS. A text transcript will be sent to
+      OpenAI<a href="https://openai.com/enterprise-privacy#:~:text=API%20Platform%20FAQ,-What%20is%20the"
+        target="_blank" rel="noopener noreferrer">*</a>.</p><br />
+    <div id="footerSecondary">
+      <a id="gelato" href="https://gelatolabs.xyz" onclick="new Audio('audio/meow.mp3').play()" target="_blank"
+        rel="noopener noreferrer">
+        <img src="img/gelato.png" alt="Gelato Labs" />
+      </a>
+      <a href="/">Menu</a>
+      <a href="scores.html" target="_blank">High Scores</a>
+      <a href="credits.html" target="_blank">Credits</a>
     </div>
   </div>
 

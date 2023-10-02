@@ -55,12 +55,12 @@ h2 {
 #elevator {
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 16px;
   width: 500px;
   height: 500px;
   background-image: url('img/elevator.png');
   overflow: hidden;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -225,13 +225,22 @@ h2 {
 
 #footer {
   display: flex;
-  gap: 1em;
+  flex-direction: column;
+  align-items: center;
   position: absolute;
-  bottom: 1em;
+  top: 532px;
   left: 50%;
+  width: 95%;
   color: #fff;
   font-size: 32px;
   transform: translateX(-50%);
+}
+
+#footerSecondary {
+  display: flex;
+  gap: 0 1em;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 #gelato {
@@ -297,4 +306,9 @@ h2 {
   50% {
     opacity: 1;
   }
+}
+
+#scores {
+  color: #fff;
+  font-size: 44px;
 }
