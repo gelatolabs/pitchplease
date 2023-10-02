@@ -369,7 +369,7 @@ function nextDialogue() {
     dialogueIndex++;
     lineIndex = 0;
     finalTranscript = '';
-    transcriptText.innerHTML = '<i>Please wait...</i>';
+    transcriptText.innerHTML = '<i>Initializing speech recognition...</i>';
     speechBubbleContainer.className = 'player pitch waiting';
     recognition.start();
   } else {
