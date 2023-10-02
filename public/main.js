@@ -18,9 +18,11 @@ const dialogues = [
     "SHOW_INVESTOR",
     "You're in luck! You've run into an angel investor in the elevator!",
     "This is your moment. Just like they taught you in business school, the best pitches always happen in elevators.",
+    "And remember. Elevators have <i>Limited Space</i> for your big brain ideas. You'll need to use it wisely and distill your pitch to the essentials. See how many words we can fit in here? It's not a lot. If I keep going on about unimportant details, I might get cut off!",
     "Investor: Good morning.",
     "You: Hi! Mind if I pitch my startup?",
     "Investor: Go ahead.",
+    "Think! What's your idea? What's the next big thing?",
     "You: So, it's a work in progress, but I had an idea for {IDEA}!"
   ],
   [
@@ -36,6 +38,7 @@ const dialogues = [
     "Investor: Good morning.",
     "You: Hi! Mind if I pitch my startup?",
     "Investor: Sure, how bad could your pitch be?",
+    "Think! What's your idea? What's the next big thing?",
     "You: So, it's a work in progress, but I had an idea for {IDEA}!"
   ],
   [
@@ -51,6 +54,7 @@ const dialogues = [
     "Investor: Good morning.",
     "You: Hi! Mind if I pitch my startup?",
     "Investor: Yeah... I guess.",
+    "Think! What's your idea? What's the next big thing?",
     "You: So, it's a work in progress, but I had an idea for {IDEA}!"
   ],
   [
@@ -66,6 +70,7 @@ const dialogues = [
     "Investor: Good morning.",
     "You: Hi! Mind if I pitch my startup?",
     "Investor: I guess I can't stop you?",
+    "Think! What's your idea? What's the next big thing?",
     "You: So, it's a work in progress, but I had an idea for {IDEA}!"
   ],
   [
@@ -81,6 +86,7 @@ const dialogues = [
     "Investor: Good morning.",
     "You: Hi! Mind if I pitch my startup?",
     "Investor: Please don't.",
+    "Think! What's your idea? What's the next big thing?",
     "You: So, it's a work in progress, but I had an idea for {IDEA}!"
   ],
   [
