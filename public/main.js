@@ -9,6 +9,10 @@ const leaderboard = document.getElementById('leaderboard');
 const ideaSpinnerContainer = document.getElementById('ideaSpinnerContainer');
 const ideaSpinner = document.getElementById('ideaSpinner');
 
+let music = new Audio('audio/music.mp3');
+music.volume = 0.15;
+music.loop = true;
+
 const dialogues = [
   [
     "You're an inglorious and underpaid Computer Science graduate.",
@@ -134,134 +138,167 @@ const ideas = [
 
 const results = [
   [
-    "",
-    ""
+    // the first VR dating app
+    "bad result",
+    "good result"
   ],
   [
-    "",
-    ""
+    // the next big B2B SaaS product
+    "bad result",
+    "good result"
   ],
   [
-    "",
-    ""
+    // a VR game
+    "bad result",
+    "good result"
   ],
   [
-    "",
-    ""
+    // an eBay clone but for rich people
+    "bad result",
+    "good result"
   ],
   [
-    "",
-    ""
+    // an eBay clone but for poor(er) people
+    "bad result",
+    "good result"
   ],
   [
-    "",
-    ""
+    // Twitter for dogs. I mean, X for dogs
+    "bad result",
+    "good result"
   ],
   [
-    "",
-    ""
+    // a metaverse on the blockchain
+    "bad result",
+    "good result"
   ],
   [
-    "",
-    ""
+    // a video game on the blockchain
+    "bad result",
+    "good result"
   ],
   [
-    "",
-    ""
+    // an app that tracks people but doesn't sound creepy
+    "bad result",
+    "good result"
   ],
   [
-    "",
-    ""
+    // some new marketing software for B2B companies
+    "bad result",
+    "good result"
   ],
   [
-    "",
-    ""
+    // an AI company that makes movie scripts
+    "bad result",
+    "good result"
   ],
   [
-    "",
-    ""
+    // an AI company that makes animated TV shows
+    "bad result",
+    "good result"
   ],
   [
-    "",
-    ""
+    // an investment company that uses AI
+    "bad result",
+    "good result"
   ],
   [
-    "",
-    ""
+    // a VR game that doesn't have guns or music
+    "bad result",
+    "good result"
   ],
   [
-    "",
-    ""
+    // an AI company that helps optimize space in warehouses
+    "bad result",
+    "good result"
   ],
   [
-    "",
-    ""
+    // a Tinder clone but for dogs
+    "bad result",
+    "good result"
   ],
   [
-    "",
-    ""
+    // an AI that functions as an interior decorator
+    "bad result",
+    "good result"
   ],
   [
-    "",
-    ""
+    // a company that helps people find doctors they actually like
+    "bad result",
+    "good result"
   ],
   [
-    "",
-    ""
+    // an AI company that will help people think my corporation isn't evil
+    "bad result",
+    "good result"
   ],
   [
-    "",
-    ""
+    // a space company that scams billionaires to spend them to space
+    "bad result",
+    "good result"
   ],
   [
-    "",
-    ""
+    // an AI company that helps optimize space on our sales floor
+    "bad result",
+    "good result"
   ],
   [
-    "",
-    ""
+    // a car company but it only sells cars to kids
+    "bad result",
+    "good result"
   ],
   [
-    "",
-    ""
+    // an app to hire people to help you win a fight
+    "bad result",
+    "good result"
   ],
   [
+    // a self-defense multi-tool
     "Protecting yourself in the streets is tough these days but a hard sell in this economy.",
     "Scoreee!! I bet my next idea will really tickle an investor's feather!"
   ],
   [
+    // VR glasses
     "Seeing is believing however creepy glasses may not quite be ready for mainstream just yet!",
     "WOOT! There's probably something else that could also really pique a VC's interest!"
   ],
   [
+    // a 4D printer
     "Maybe this idea needs a bit more work to make it to the next dimension.",
     "Time to go back to the future! The next investor will surely recognize my unicorn potential!"
   ],
   [
+    // a lottery number predictor
     "It seemed amazing on the surface but there must be a missing semicolon somewhere!",
     "What a jackpot!! I can just feel it, I'm going to score even bigger next time!"
   ],
   [
+    // a free speech generator
     "It was going great until you found out the investor is from Canada.",
     "There's still big money in the social media space, who knew? I hope the next investor has even deeper pockets!"
   ],
   [
+    // a DIY home root canal kit
     "Everybody's afraid of the dentist, however the injections probably were a bit much!",
     "That was a real winner! The pandemic really did elevate the DIY sector!"
   ],
   [
+    // a life-sized Lego house
     "I was so sure stepping on legos could actually be a good thing for once!",
     "Thank you inflation - I knew this would appeal to the right maniac!"
   ],
   [
+    // a Veganizer ray
     "I guess I shouldn't have expected much from someone with bbq sauce on their chin.",
     "The vegan movement is real! Let's get on saving the planet - flower power!"
   ],
   [
+    // a smart lawnmower
     "Not that surprising given the prototype cost us one arm and a leg!",
     "Big win for me and the environment! Let's keep those lithium mines pumping!"
   ],
   [
+    // a site called OnlyCans
     "I have a feeling there's some fierce competition in this space.",
     "Hawww yeah! Next step is to work on promoting our two can melon promotion!"
   ]
@@ -299,7 +336,13 @@ function spinIdeas(line, callback) {
 
     ideaSpinner.style.animation = 'spin 5000ms linear infinite';
 
+    const spinSound = new Audio('audio/spin.mp3');
+    spinSound.volume = 0.25;
+    spinSound.play();
+
     setTimeout(() => {
+      spinSound.pause();
+      new Audio('audio/ding.mp3').play();
       const computedStyle = window.getComputedStyle(ideaSpinner);
       ideaSpinner.style.animation = 'none';
       ideaSpinner.style.transform = computedStyle.transform;
@@ -320,6 +363,7 @@ function spinIdeas(line, callback) {
 }
 
 function nextDialogue() {
+  transcriptText.style.fontSize = '44px';
   const lines = dialogues[dialogueIndex];
 
   if (dialogueIndex <= 0) {
@@ -371,6 +415,7 @@ function nextDialogue() {
     finalTranscript = '';
     transcriptText.innerHTML = '<i>Initializing speech recognition...</i>';
     speechBubbleContainer.className = 'player pitch waiting';
+    music.volume = 0.05;
     recognition.start();
   } else {
     endGame();
@@ -378,8 +423,12 @@ function nextDialogue() {
 }
 
 async function endPitch() {
-  new Audio('audio/ding.mp3').play();
   recognition.stop();
+  new Audio('audio/ding.mp3').play();
+  music = new Audio('audio/music.mp3');
+  music.volume = 0.15;
+  music.loop = true;
+  music.play();
   speechBubbleContainer.className = 'investor';
   transcriptText.textContent = 'Investor: That\'s my stop. Hmm...';
   console.log(finalTranscript);
@@ -414,7 +463,7 @@ async function sendToGPT(transcript) {
   score += investmentAmount;
   scoreText.textContent = `Score: $${score}`;
 
-  let fontSize = 38;
+  let fontSize = 44;
   while (speechBubble.scrollHeight > elevator.clientHeight || speechBubble.scrollWidth > elevator.clientWidth) {
     fontSize--;
     transcriptText.style.fontSize = `${fontSize}px`;
@@ -489,6 +538,9 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
   elevator.addEventListener('click', function () {
+    if (music.paused || !music.currentTime)
+      music.play();
+
     if (state === 'waiting') {
       return;
     } else if (state === 'recognizing') {
