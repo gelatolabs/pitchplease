@@ -1,6 +1,8 @@
 @font-face {
   font-family: 'RS';
-  src: url('font/rs.ttf') format('truetype');
+  src: url('font/rs.woff2') format('woff2'),
+    url('font/rs.woff') format('woff'),
+    url('font/rs.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -14,7 +16,7 @@
 
 body {
   background-color: #000;
-  font-family: "RS", monospace;
+  font-family: 'RS', monospace;
   margin: 0;
   text-align: center;
 }
@@ -33,7 +35,7 @@ a {
 
 h1,
 h2 {
-  font-family: 'DigitalDisco', monospace;
+  font-family: 'DigitalDisco', 'RS', monospace;
   font-weight: normal;
   margin-bottom: 0;
 }
@@ -100,7 +102,7 @@ h2 {
 
 #speechBubbleContainer.player:after,
 #speechBubbleContainer.investor:after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: 0;
   width: 0;
@@ -114,7 +116,7 @@ h2 {
 
 #speechBubbleContainer.player:before,
 #speechBubbleContainer.investor:before {
-  content: "";
+  content: '';
   position: absolute;
   bottom: 0;
   width: 0;
