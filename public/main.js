@@ -492,7 +492,16 @@ async function endGame() {
   leaderboard.style.display = 'block';
 }
 
+function scaleViewport() {
+  if (window.outerWidth < 500) {
+    const scale = window.outerWidth / 500;
+    document.getElementById('viewport').setAttribute('content', `width=device-width, initial-scale=${scale} maximum-scale=${scale} user-scalable=no`);
+  }
+}
+
 document.addEventListener('DOMContentLoaded', function () {
+  scaleViewport();
+
   try {
     recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
   } catch (error) {
@@ -554,3 +563,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
   nextDialogue();
 });
+
+window.addEventListener('resize', scaleViewport);
