@@ -103,16 +103,13 @@ const dialogues = [
 const ideas = [
   "the first VR dating app",
   "the next big B2B SaaS product",
-  "a VR game",
   "an eBay clone but for rich people",
-  "an eBay clone but for poor(er) people",
   "Twitter for dogs. I mean, X for dogs",
   "a metaverse on the blockchain",
   "a video game on the blockchain",
   "an app that tracks people but doesn't sound creepy",
   "some new marketing software for B2B companies",
   "an AI company that makes movie scripts",
-  "an AI company that makes animated TV shows",
   "an investment company that uses AI",
   "a VR game that doesn't have guns or music",
   "an AI company that helps optimize space in warehouses",
@@ -121,7 +118,6 @@ const ideas = [
   "a company that helps people find doctors they actually like",
   "an AI company that will help people think my corporation isn't evil",
   "a space company that scams billionaires to spend them to space",
-  "an AI company that helps optimize space on our sales floor",
   "a car company but it only sells cars to kids",
   "an app to hire people to help you win a fight",
   "a self-defense multi-tool",
@@ -139,168 +135,98 @@ const ideas = [
 const results = [
   [
     // the first VR dating app
-    "bad result",
-    "good result"
+    "They probably took the reduction in spending by Metta at Facecrook value.",
+    "It's about time - VR has been flirtually ready to take off for too long!"
   ],
   [
     // the next big B2B SaaS product
-    "bad result",
-    "good result"
-  ],
-  [
-    // a VR game
-    "bad result",
-    "good result"
+    "The idea just wasn't big enough to fit the software requirements.",
+    "That's money in the bank! Now it's time to start printing crypto!"
   ],
   [
     // an eBay clone but for rich people
-    "bad result",
-    "good result"
+    "Bougiebay seemed like such a good idea!",
+    "Woo-hoo, I had a feeling 2nd hand designer undergarments might be a winner!"
   ],
   [
-    // an eBay clone but for poor(er) people
-    "bad result",
-    "good result"
-  ],
-  [
-    // Twitter for dogs. I mean, X for dogs
-    "bad result",
-    "good result"
+    // Twitter for birds. I mean, X for birds
+    "I guess the tweets per minute just weren't fast enough for adequate investor stimulation.",
+    "Meep meep!  Maybe the next hot feature will involve nested loops!"
   ],
   [
     // a metaverse on the blockchain
-    "bad result",
-    "good result"
+    "Metaverses just can't seem to catch a break these days, maybe insert more buzzwords next time?",
+    "Yess!  I'm going to invest everything I have too - what could go wrong?"
   ],
   [
     // a video game on the blockchain
-    "bad result",
-    "good result"
+    "Hmmm a video game on top of the block chain might be a bit unstable.",
+    "Hooray!  I wonder if we could port a glass of winecraft."
   ],
   [
     // an app that tracks people but doesn't sound creepy
-    "bad result",
-    "good result"
+    "Personal information and hygiene can definitely be touchy subjects.",
+    "As long as we shrink the EULA font and keep making it longer everything will be ok!"
   ],
   [
     // some new marketing software for B2B companies
-    "bad result",
-    "good result"
+    "Advertising never really was my cup of tea.",
+    "Bro 2 Bro companies are where it's at, easy money!"
   ],
   [
     // an AI company that makes movie scripts
-    "bad result",
-    "good result"
-  ],
-  [
-    // an AI company that makes animated TV shows
-    "bad result",
-    "good result"
+    "That investor was probably related to one of those Hollywood writers.",
+    "Cha-ching!  Those Hollywood writers won't stand a chance!"
   ],
   [
     // an investment company that uses AI
-    "bad result",
-    "good result"
+    "I just don't get it - when has AI ever failed us before?",
+    "Excellent!  Time to get started on this Ponzi scheme!"
   ],
   [
     // a VR game that doesn't have guns or music
-    "bad result",
-    "good result"
+    "Maybe we should try the VR dating space instead, I've heard good things about Flirtual.",
+    "I knew this would work!  Now we must rely on a tech conglomerate to launch an affordable quality headset!"
   ],
   [
     // an AI company that helps optimize space in warehouses
-    "bad result",
-    "good result"
+    "That didn't quite work out but what about a game that rotates shapes to form lines with catchy music?",
+    "Wooohooo - time to create some boxing videos to test filling those gaps!"
   ],
   [
     // a Tinder clone but for dogs
-    "bad result",
-    "good result"
+    "Puppy love is so underappreciated.",
+    "Supporting our pet love lives was such an easy sell!  Look out for hump-day!"
   ],
   [
     // an AI that functions as an interior decorator
-    "bad result",
-    "good result"
+    "If AI can't drive a car I suppose we can't expect it to drive a paintbrush.",
+    "This is so exciting - I'll finally be able to bring all my Minecraft fantasies to life!"
   ],
   [
     // a company that helps people find doctors they actually like
-    "bad result",
-    "good result"
+    "Maybe we should hire a real Doctor to consult next time instead of a dentist.",
+    "Sweet!  I wonder how much Facecrook will pay us for medical records!"
   ],
   [
     // an AI company that will help people think my corporation isn't evil
-    "bad result",
-    "good result"
+    "Maybe it's an impossible task after all.",
+    "I wonder who our first client might be - oh look Zark Muckerberg is blowing up my phone!"
   ],
   [
-    // a space company that scams billionaires to spend them to space
-    "bad result",
-    "good result"
-  ],
-  [
-    // an AI company that helps optimize space on our sales floor
-    "bad result",
-    "good result"
+    // a space company that scams billionaires to send them to the moon
+    "Lunar flexing just doesn't seem to have the appeal it once did.",
+    "That's one small step for me and one big step for con artistry."
   ],
   [
     // a car company but it only sells cars to kids
-    "bad result",
-    "good result"
+    "I guess we never really considered the insurance implications!  DOH!",
+    "Now all we need to come up with is a catchy jingle - something like 1-877.."
   ],
   [
     // an app to hire people to help you win a fight
-    "bad result",
-    "good result"
-  ],
-  [
-    // a self-defense multi-tool
-    "Protecting yourself in the streets is tough these days but a hard sell in this economy.",
-    "Scoreee!! I bet my next idea will really tickle an investor's feather!"
-  ],
-  [
-    // VR glasses
-    "Seeing is believing however creepy glasses may not quite be ready for mainstream just yet!",
-    "WOOT! There's probably something else that could also really pique a VC's interest!"
-  ],
-  [
-    // a 4D printer
-    "Maybe this idea needs a bit more work to make it to the next dimension.",
-    "Time to go back to the future! The next investor will surely recognize my unicorn potential!"
-  ],
-  [
-    // a lottery number predictor
-    "It seemed amazing on the surface but there must be a missing semicolon somewhere!",
-    "What a jackpot!! I can just feel it, I'm going to score even bigger next time!"
-  ],
-  [
-    // a free speech generator
-    "It was going great until you found out the investor is from Canada.",
-    "There's still big money in the social media space, who knew? I hope the next investor has even deeper pockets!"
-  ],
-  [
-    // a DIY home root canal kit
-    "Everybody's afraid of the dentist, however the injections probably were a bit much!",
-    "That was a real winner! The pandemic really did elevate the DIY sector!"
-  ],
-  [
-    // a life-sized Lego house
-    "I was so sure stepping on legos could actually be a good thing for once!",
-    "Thank you inflation - I knew this would appeal to the right maniac!"
-  ],
-  [
-    // a Veganizer ray
-    "I guess I shouldn't have expected much from someone with bbq sauce on their chin.",
-    "The vegan movement is real! Let's get on saving the planet - flower power!"
-  ],
-  [
-    // a smart lawnmower
-    "Not that surprising given the prototype cost us one arm and a leg!",
-    "Big win for me and the environment! Let's keep those lithium mines pumping!"
-  ],
-  [
-    // a site called OnlyCans
-    "I have a feeling there's some fierce competition in this space.",
-    "Hawww yeah! Next step is to work on promoting our two can melon promotion!"
+    "Too bad, this would have come in handy in my highschool years!",
+    "A little \"hired help\" can always come in handy!  I'll never lose a fight again!"
   ]
 ]
 
