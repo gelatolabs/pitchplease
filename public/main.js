@@ -82,11 +82,11 @@ const dialogues = [
     "RESULT",
     "NEW_DAY",
     "Well, you've run out of money for your {PREVIOUS_IDEA} and now you need to convince an investor to give you Series E funding.",
-    "You may have to pivot from your idea, but you've learned a lot and you're feeling confident.",
+    "You've almost run out of ideas and you think you're probably done spending other people's money on fruitless endeavors.",
     "You're on your way to meet with your divorce lawyer and you step into the elevator.",
     "SHOW_INVESTOR",
-    "Wow, what luck! A Dogecoin millionaire just walked into the elevator. He must make level-headed decisions.",
-    "This is your moment. Just like they taught you in business school, the best pitches always happen in elevators.",
+    "Wow, what luck! A Dogecoin millionaire just walked into the elevator. This might be your last chance to be happy.",
+    "This is your moment!",
     "Investor: Good morning.",
     "You: Hi! Mind if I pitch my startup?",
     "Investor: Please don't.",
@@ -95,8 +95,8 @@ const dialogues = [
   ],
   [
     "HIDE_INVESTOR",
-    "RESULT",
-    "END"
+    "END",
+    "THE END. Thanks for playing!"
   ]
 ]
 
