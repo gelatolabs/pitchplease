@@ -108,7 +108,7 @@ const ideas = [
   "an app that tracks people but doesn't sound creepy",
   "some new marketing software for B2B companies",
   "an AI company that makes movie scripts",
-  "an AI company that makes animated tv shows",
+  "an AI company that makes animated TV shows",
   "an investment company that uses AI",
   "a VR game that doesn't have guns or music",
   "an AI company that helps optimize space in warehouses",
