@@ -96,7 +96,7 @@ const dialogues = [
   [
     "HIDE_INVESTOR",
     "RESULT",
-    "THE END"
+    "END"
   ]
 ]
 
@@ -227,6 +227,56 @@ const results = [
     // an app to hire people to help you win a fight
     "Too bad, this would have come in handy in my highschool years!",
     "A little \"hired help\" can always come in handy!  I'll never lose a fight again!"
+  ],
+  [
+    // a self-defense multi-tool
+    "Protecting yourself in the streets is tough these days but a hard sell in this economy.",
+    "Scoreee!! I bet my next idea will really tickle an investor's feather!"
+  ],
+  [
+    // VR glasses
+    "Seeing is believing however creepy glasses may not quite be ready for mainstream just yet!",
+    "WOOT! There's probably something else that could also really pique a VC's interest!"
+  ],
+  [
+    // a 4D printer
+    "Maybe this idea needs a bit more work to make it to the next dimension.",
+    "Time to go back to the future! The next investor will surely recognize my unicorn potential!"
+  ],
+  [
+    // a lottery number predictor
+    "It seemed amazing on the surface but there must be a missing semicolon somewhere!",
+    "What a jackpot!! I can just feel it, I'm going to score even bigger next time!"
+  ],
+  [
+    // a free speech generator
+    "It was going great until you found out the investor is from Canada.",
+    "There's still big money in the social media space, who knew? I hope the next investor has even deeper pockets!"
+  ],
+  [
+    // a DIY home root canal kit
+    "Everybody's afraid of the dentist, however the injections probably were a bit much!",
+    "That was a real winner! The pandemic really did elevate the DIY sector!"
+  ],
+  [
+    // a life-sized Lego house
+    "I was so sure stepping on legos could actually be a good thing for once!",
+    "Thank you inflation - I knew this would appeal to the right maniac!"
+  ],
+  [
+    // a Veganizer ray
+    "I guess I shouldn't have expected much from someone with bbq sauce on their chin.",
+    "The vegan movement is real! Let's get on saving the planet - flower power!"
+  ],
+  [
+    // a smart lawnmower
+    "Not that surprising given the prototype cost us one arm and a leg!",
+    "Big win for me and the environment! Let's keep those lithium mines pumping!"
+  ],
+  [
+    // a site called OnlyCans
+    "I have a feeling there's some fierce competition in this space.",
+    "Hawww yeah! Next step is to work on promoting our two can melon promotion!"
   ]
 ]
 
@@ -326,6 +376,14 @@ function nextDialogue() {
           const previousIdeaIndex = ideas.indexOf(previousIdea);
           const performance = lastScore < 50000 ? 0 : 1;
           line = results[previousIdeaIndex][performance];
+        } else if (line === 'END') {
+          if (score < 200000) {
+            line = 'Perhaps you just weren\'t cut out for entrepreneurship.  Maybe try something less volatile like a 9-5 career for a soulless corporation that will slowly suck your essence away until you reach the grave.';
+          } else if (score < 700000) {
+            line = 'Not a bad start!  Keep playing this game until your fingers bleed and you might just have a shot at the big time!';
+          } else {
+            line = 'Excellent work - but did you reach deep enough into those pockets? Play again and see if there is a limit to your genius!';
+          }
         }
         elevator.className = '';
         speechBubbleContainer.style.display = 'block';
@@ -385,7 +443,7 @@ async function sendToGPT(transcript) {
 
   const investmentMatch = message.match(/\$\s?[\d,]+(\.\d+)?/);
   const investmentAmount = investmentMatch ? parseFloat(investmentMatch[0].replace(/[\$,]/g, '')) : 0;
-  previousScore = investmentAmount;
+  lastScore = investmentAmount;
   score += investmentAmount;
   scoreText.textContent = `Score: $${score}`;
 
