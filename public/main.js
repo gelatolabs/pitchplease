@@ -369,7 +369,7 @@ async function sendToGPT(transcript) {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ prompt: transcript, budget: difficulty * 100000 })
+    body: JSON.stringify({ prompt: transcript, budget: (difficulty + 1) * 100000 })
   });
 
   if (!response.ok) {
