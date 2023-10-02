@@ -137,22 +137,22 @@ h2 {
 }
 
 #speechBubbleContainer.player:after {
-  left: 76px;
+  left: 32px;
   border-right: 0;
 }
 
 #speechBubbleContainer.player:before {
-  left: 80px;
+  left: 36px;
   border-right: 0;
 }
 
 #speechBubbleContainer.investor:after {
-  right: 76px;
+  right: 32px;
   border-left: 0;
 }
 
 #speechBubbleContainer.investor:before {
-  right: 80px;
+  right: 36px;
   border-left: 0;
 }
 
