@@ -1,0 +1,40 @@
+/**
+ * For more details on how to configure Wrangler, refer to:
+ * https://developers.cloudflare.com/workers/wrangler/configuration/
+ */
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "pitchplease",
+	"main": "src/index.ts",
+	"compatibility_date": "2025-04-05",
+	"assets": {
+		"binding": "ASSETS",
+		"directory": "./public"
+	},
+	"observability": {
+		"enabled": true
+	},
+	/**
+	 * Rate limiting and KV storage
+	 */
+	"kv_namespaces": [
+		{
+			"binding": "SCORES",
+			"id": "e170efe8f6ea42c2a48bf306881e97e7",
+			"preview_id": "2dff39920b004b06a28302f18cccb253"
+		}
+	],
+	"unsafe": {
+		"bindings": [
+			{
+				"name": "RATE_LIMITER",
+				"type": "ratelimit",
+				"namespace_id": "1001",
+				"simple": {
+					"limit": 6,
+					"period": 60
+				}
+			}
+		]
+	}
+}
